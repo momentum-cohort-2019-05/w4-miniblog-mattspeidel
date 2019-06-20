@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Miniblog Home</h1>
+  <p>Welcome to Miniblog, a site for fake bloggers and stuff!</p>
+  <h2>Dynamic content</h2>
+  <p>The blog has this many thangs:</p>
+  <ul>
+    <li><strong>Blogs:</strong> {{ num_blogs }}</li>
+    <li><strong>Bloggers:</strong> {{ num_bloggers }}</li>
+    <li><strong>Comments:</strong> {{ num_comments }}</li>
+  </ul>
+{% endblock %}
