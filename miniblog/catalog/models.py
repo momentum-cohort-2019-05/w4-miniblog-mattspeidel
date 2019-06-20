@@ -36,7 +36,7 @@ class Comment(models.Model):
     name = models.CharField(max_length=100)
     post_date = models.DateField(null=True, blank=True)
     post_time = models.TimeField(null=True, blank=True)
-    coment = models.TextField(max_length=300, help_text='Enter your comment')
+    comment = models.TextField(max_length=300, help_text='Enter your comment')
 
     def __str__(self):
         return f'{self.name}'
