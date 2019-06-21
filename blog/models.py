@@ -37,7 +37,7 @@ class Comment(models.Model):
     name = models.CharField(max_length=100)
     post_date = models.DateField(null=True, blank=True)
     post_time = models.TimeField(null=True, blank=True)
-    comment = models.TextField(max_length=300, help_text='Enter your comment')
+    comment = models.TextField(max_length=300, help_text='Enter comment about blog here.')
     commenter = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
