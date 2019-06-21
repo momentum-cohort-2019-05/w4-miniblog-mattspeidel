@@ -42,4 +42,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+    class Meta:
+        
+        permissions = (("can_post_comment", "Post comment"),)  
+
     
