@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views import generic
 
 # Create your views here.
 from blog.models import Blog, Blogger, Comment
@@ -22,3 +23,9 @@ def index(request):
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
+
+class BlogListView(generic.ListView):
+    model = Blog
+
+class BlogDetailView(generic.DetailView):
+    model = Blog
