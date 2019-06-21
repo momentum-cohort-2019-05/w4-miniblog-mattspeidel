@@ -27,9 +27,9 @@ class Blogger(models.Model):
     def __str__(self):
         return f'{self.name}'
 
-    def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
-        return reverse('author-detail', args=[str(self.id)])
+    # def get_absolute_url(self):
+    #     """Returns the url to access a particular blogger instance."""
+    #     return reverse('blogger-detail', args=[str(self.id)])
 
 class Comment(models.Model):
 
