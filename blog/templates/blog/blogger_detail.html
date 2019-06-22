@@ -5,19 +5,10 @@
 <h1>Blogger: {{ blogger }} </h1>
 <h4>Bio</h4>
 <p>{{blogger.bio}}</p>
-<h4>Blogs List</h4>
-
-<div style="margin-left:20px;margin-top:20px">
-    {% if blog_list %}
-    <ul>
-        {% for blog in blog_list %}
-        <li>
-            <a href="{{ blog.author.get_absolute_url }}">{{ blog.title }}</a> ({{blog.author}})
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-        <p>There are no blogs on the site.</p>
-    {% endif %}    
-</div>
+<h3>Blogs list</h3>
+<dl>
+    {% for blog in blogger.blog_set.all %}
+        <dt><a href="{% url 'blog-detail' blog.pk %}">{{blog}}</a> ({{blog.post_date}})</dt>
+    {% endfor %}
+</dl>
 {% endblock %}

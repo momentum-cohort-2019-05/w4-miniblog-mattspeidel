@@ -22,11 +22,11 @@ class Blog(models.Model):
 
 class Blogger(models.Model):
 
-    name = models.CharField(max_length=100)
+    name = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     bio = models.TextField(max_length=1000, help_text='Enter a bio')
 
     def __str__(self):
-        return f'{self.name}'
+        return self.name.username
 
     def get_absolute_url(self):
         """Returns the url to access a particular blogger instance."""
@@ -41,7 +41,7 @@ class Comment(models.Model):
     commenter = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
-        return f'{self.name}'
+        return self.comment
 
     class Meta:
         

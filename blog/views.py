@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+
 
 # Create your views here.
 from blog.models import Blog, Blogger, Comment
@@ -44,9 +47,7 @@ class CommentView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView)
     permission_required = 'blog.can_post_comment'
     template_name = 'blog/comment_form.html'
 
-    def get_queryset(self):
-        return Comment.objects.filter().order_by('post_date')
-
-class CommentCreate(CreateView):
+class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
     fields = ['comment']
+
