@@ -31,7 +31,7 @@ def index(request):
 
 class BlogListView(generic.ListView):
     model = Blog
-    paginate_by = 10
+    paginate_by = 5
 
 class BlogDetailView(generic.DetailView):
     model = Blog
@@ -50,4 +50,16 @@ class CommentView(LoginRequiredMixin, PermissionRequiredMixin, generic.ListView)
 class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
     fields = ['comment']
+        
+    def form_valid(self, form):
+        form.instance.commenter = self.request.user
+        form.instance.blog=get_object_or_404(Blog, pk = self.kwargs['pk'])
+        return super(CommentCreate, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(CommentCreate, self).get_context_data(**kwargs)
+        context['blog'] = get_object_or_404(Blog, pk = self.kwargs['pk'])
+        return context        
+
+    def get_success_url(self): 
+        return reverse('blog-detail', kwargs={'pk': self.kwargs['pk'],})

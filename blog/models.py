@@ -11,7 +11,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey('Blogger', on_delete=models.SET_NULL, null=True)
     description = models.TextField(max_length=1000, help_text='Enter your blog text')
-    post_date = models.DateField(null=True, blank=True)
+    post_date = models.DateField(null=True, blank=True, default=date.today)
 
     def __str__(self):
         return self.title
@@ -34,9 +34,9 @@ class Blogger(models.Model):
 
 class Comment(models.Model):
 
-    name = models.CharField(max_length=100)
-    post_date = models.DateField(null=True, blank=True)
-    post_time = models.TimeField(null=True, blank=True)
+    blog = models.ForeignKey(Blog, on_delete=models.SET_NULL, null=True)
+    post_date = models.DateField(null=True, blank=True, default=date.today)
+    post_time = models.TimeField(null=True, blank=True, auto_now=True)
     comment = models.TextField(max_length=300, help_text='Enter comment about blog here.')
     commenter = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 

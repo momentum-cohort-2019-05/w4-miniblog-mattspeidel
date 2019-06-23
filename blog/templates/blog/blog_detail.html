@@ -9,17 +9,12 @@
   <p>{{ blog.description }}</p> 
  
   <div style="margin-left:20px;margin-top:20px">
-    <!-- COMMENTS WILL GO DOWN HERE -->
-    <!-- <h4>Copies</h4>
-
-    {% for copy in blog.bloginstance_set.all %}
-      <hr>
-      <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
-      {% if copy.status != 'a' %}
-        <p><strong>Due to be returned:</strong> {{copy.due_back}}</p>
-      {% endif %}
-      <p><strong>Imprint:</strong> {{copy.imprint}}</p>
-      <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
-    {% endfor %} -->
+    <h4>Comments</h4>
+    {% for comment in blog.comment_set.all %}
+    <hr>
+    <p>{{comment.commenter}} ({{comment.post_date}} {{comment.post_time}}) - {{comment.comment}}</p>
+    {% endfor %}
+    <hr>
+    <a href="{% url 'comment_create' blog.id %}">Add a new comment</a></p>
   </div>
 {% endblock %}
